@@ -1,19 +1,17 @@
 package com.quanlychiteunhom.backend.test.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.quanlychiteunhom.backend.test.controller.entities.Nhom;
-import com.quanlychiteunhom.backend.test.controller.request.NhomRequest;
 import com.quanlychiteunhom.backend.test.controller.services.NhomService;
+import com.quanlychiteunhom.backend.test.controller.services.QuyService;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -23,20 +21,34 @@ public class TestController {
     @Autowired
     private NhomService nhomService;
 
-    @GetMapping("/test")
-    public String test() {
-        return "Hello World";
-    }
+    @Autowired
+    private QuyService quyService;
 
+    // @GetMapping("/nhom")
+    // public ResponseEntity<List<Nhom>> getNhom() {
+    //     return nhomService.getNhom();
+    // }
+
+
+    // @Autowired
+    // public ResponseEntity<Quy> getTIenHT(QuyRequest quyRequest) {
+    //     Quy quy = new Quy();
+    //     quy.getSoTienHT();
+    //     return ResponseEntity.ok(quy);
+    // }
+    
     @GetMapping("/nhom")
     public ResponseEntity<List<Nhom>> getNhom() {
         return nhomService.getNhom();
     }
 
-
-    @PostMapping("/nhoms")
-    public ResponseEntity<Nhom> addNhom(@RequestBody NhomRequest nhom) {
-        return nhomService.addNhom(nhom);
+    @GetMapping("/chiaDeuTien")
+    public ResponseEntity<String> chiaDeuTien(@RequestParam("nhomId") int nhomId) {
+        try {
+            double soTienMoiThanhVien = quyService.chiaDeuTien(nhomId);
+            return ResponseEntity.ok("Số tiền mỗi thành viên là: " + soTienMoiThanhVien);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
-
 }
