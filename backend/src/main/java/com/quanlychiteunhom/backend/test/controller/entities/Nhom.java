@@ -33,4 +33,13 @@ public class Nhom {
 
     @Column(name = "hinh_nhom")
     private String hinhNhom;
+
+    @Override
+    public String toString() {
+        return "Nhom{" +
+                "id=" + id +
+                ", tenNhom='" + tenNhom + '\'' +
+                ", hinhNhom='" + hinhNhom + '\'' +
+                '}';
+    }
 }

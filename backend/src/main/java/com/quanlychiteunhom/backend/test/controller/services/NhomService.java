@@ -37,4 +37,16 @@ public class NhomService {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    public ResponseEntity<List<Nhom>> deleteNhom(int nhom){
+        try {
+            List<Nhom> _nhom = nhomRepo.findAll();
+            nhomRepo.deleteById(_nhom.get(0).getId());
+            return new ResponseEntity<>(_nhom, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }
