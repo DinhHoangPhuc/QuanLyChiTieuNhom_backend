@@ -37,14 +37,14 @@ public class ThanhVienService {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    public ResponseEntity<ThanhVien> xoaNguoiDungRaKhoaKhong(int idnhom, int idnguoidung) {
-        try {
-            ThanhVien nhom = thanhVienRepo.findById(idnhom)
-            ThanhVien nguoiDung = thanhVienRepo.findById(idnguoidung)
-                    nguoiDung(idnguoidung);
-            return ResponseEntity.noContent().build();
-        } catch (Excepti  on e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
+//    public ResponseEntity<ThanhVien> roiNguoiDungRaKhoaKhong(int idnhom, int idnguoidung) {
+//        try {
+//            ThanhVien nhom = thanhVienRepo.findById(idnhom)
+//            ThanhVien nguoiDung = thanhVienRepo.findById(idnguoidung)
+//                    nguoiDung(idnguoidung);
+//            return ResponseEntity.noContent().build();
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//    }
 }
