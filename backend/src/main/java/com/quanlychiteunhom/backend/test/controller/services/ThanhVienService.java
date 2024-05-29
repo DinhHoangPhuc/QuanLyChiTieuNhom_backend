@@ -1,6 +1,5 @@
 package com.quanlychiteunhom.backend.test.controller.services;
 
-import com.quanlychiteunhom.backend.test.controller.entities.Nhom;
 import com.quanlychiteunhom.backend.test.controller.entities.ThanhVien;
 import com.quanlychiteunhom.backend.test.controller.repositories.ThanhVienRepo;
 import com.quanlychiteunhom.backend.test.controller.request.ThanhVienRequest;
@@ -38,18 +37,14 @@ public class ThanhVienService {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-//    public ResponseEntity<Void> xoaNguoiDungRaKhoaKhong(int idnhom, int idnguoidung) {
-//        try {
-//            Nhom nhom = thanhVienRepo.findById(idnhom)
-//                    .orElseThrow(() -> new ResourceNotFoundException("Nhóm không tồn tại"));
-//            ThanhVien nguoiDung = thanhVienRepo.findById(idnguoidung)
-//                    .orElseThrow(() -> new ResourceNotFoundException("Người dùng không tồn tại"));
-//
-//            thanhVienRepo.deleteByIdnhomAndIdnguoidung(idnhom, idnguoidung);
-//
-//            return ResponseEntity.noContent().build();
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
-//    }
+    public ResponseEntity<ThanhVien> xoaNguoiDungRaKhoaKhong(int idnhom, int idnguoidung) {
+        try {
+            ThanhVien nhom = thanhVienRepo.findById(idnhom)
+            ThanhVien nguoiDung = thanhVienRepo.findById(idnguoidung)
+                    nguoiDung(idnguoidung);
+            return ResponseEntity.noContent().build();
+        } catch (Excepti  on e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }
