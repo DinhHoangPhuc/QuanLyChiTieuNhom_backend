@@ -25,7 +25,7 @@ public class ThanhVienController {
         return thanhVienService.getThanhVien();
     }
 
-    @PostMapping("/thanhviens")
+    @PostMapping("/addthanhvien")
     public ResponseEntity<ThanhVien> addThanhVien(@RequestBody ThanhVienRequest thanhVienRequest) {
         return thanhVienService.addThanhVien(thanhVienRequest);
     }

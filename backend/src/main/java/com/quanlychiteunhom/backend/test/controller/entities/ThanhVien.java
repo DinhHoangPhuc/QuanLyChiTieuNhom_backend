@@ -21,10 +21,10 @@ public class ThanhVien {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "id_nhom")
+    @Column(name = "nhom_id")
     private int idnhom;
 
-    @Column(name = "id_nguoidung")
+    @Column(name = "nguoi_dung_id")
     private int idnguoidung;
 
     @Column(name = "quyen")
