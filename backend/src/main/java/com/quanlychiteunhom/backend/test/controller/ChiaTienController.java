@@ -18,7 +18,6 @@ public class ChiaTienController {
     @Autowired
     private QuyService quyService;
 
-
     @GetMapping("/chiaDeuTien")
     public ResponseEntity<String> chiaDeuTien(@RequestParam("nhomId") int nhomId) {
         try {
