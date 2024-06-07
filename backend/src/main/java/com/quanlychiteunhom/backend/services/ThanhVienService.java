@@ -1,4 +1,4 @@
-package com.quanlychiteunhom.backend.test.controller.services;
+package com.quanlychiteunhom.backend.services;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.quanlychiteunhom.backend.test.controller.entities.ThanhVien;
-import com.quanlychiteunhom.backend.test.controller.repositories.ThanhVienRepo;
+import com.quanlychiteunhom.backend.entities.ThanhVien;
+import com.quanlychiteunhom.backend.repositories.ThanhVienRepo;
 @Service
 public class ThanhVienService {
 

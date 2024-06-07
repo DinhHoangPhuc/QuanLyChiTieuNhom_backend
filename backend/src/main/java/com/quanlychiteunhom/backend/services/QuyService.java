@@ -1,14 +1,14 @@
-package com.quanlychiteunhom.backend.test.controller.services;
+package com.quanlychiteunhom.backend.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.quanlychiteunhom.backend.test.controller.entities.Quy;
-import com.quanlychiteunhom.backend.test.controller.entities.ThanhVien;
-import com.quanlychiteunhom.backend.test.controller.repositories.QuyRepo; // Add this import statement
-import com.quanlychiteunhom.backend.test.controller.repositories.ThanhVienRepo; // Add this import statement
+import com.quanlychiteunhom.backend.entities.Quy;
+import com.quanlychiteunhom.backend.entities.ThanhVien;
+import com.quanlychiteunhom.backend.repositories.QuyRepo;
+import com.quanlychiteunhom.backend.repositories.ThanhVienRepo;
 @Service
 public class QuyService {
     @Autowired

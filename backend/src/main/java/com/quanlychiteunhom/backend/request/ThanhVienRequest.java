@@ -1,4 +1,4 @@
-package com.quanlychiteunhom.backend.test.controller.request;
+package com.quanlychiteunhom.backend.request;
 
 import lombok.Getter;
 import lombok.Setter;

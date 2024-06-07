@@ -1,0 +1,20 @@
+[33mcommit 254f4935646d55deecf342d2c8badd0262f639f8[m[33m ([m[1;36mHEAD -> [m[1;32mNgan[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/Ngan[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 84cf5f4 d9e8d03
+Author: jinyin11 <127934154+jinyin11@users.noreply.github.com>
+Date:   Tue May 28 23:37:21 2024 +0700
+
+    Merge pull request #1 from DinhHoangPhuc/Ngan
+    
+    them quy, thanh vien va cac thanh phan lien quan de tao api tinh so tien chia cho moi thanh vien
+
+[33mcommit d9e8d0366b635181db1d7486bc932cdd51f700c9[m
+Author: jinyin11 <kimngan4869@gmail.com>
+Date:   Tue May 28 23:34:16 2024 +0700
+
+    them quy
+
+[33mcommit 84cf5f485fcf095ec4f55479a559fafcfd622a73[m[33m ([m[1;31morigin/QuocAnh[m[33m, [m[1;31morigin/Phuc[m[33m, [m[1;32mTuyen[m[33m, [m[1;32mQuocAnh[m[33m, [m[1;32mPhuc[m[33m)[m
+Author: Dinh Hoang Phuc <98966221+DinhHoangPhuc@users.noreply.github.com>
+Date:   Sun May 26 14:41:50 2024 +0700
+
+    first commit

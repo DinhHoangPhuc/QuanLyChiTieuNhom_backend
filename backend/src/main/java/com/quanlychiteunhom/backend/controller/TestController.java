@@ -1,12 +1,12 @@
-package com.quanlychiteunhom.backend.test.controller;
+package com.quanlychiteunhom.backend.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.quanlychiteunhom.backend.test.controller.entities.Nhom;
-import com.quanlychiteunhom.backend.test.controller.services.NhomService;
-import com.quanlychiteunhom.backend.test.controller.services.QuyService;
+import com.quanlychiteunhom.backend.entities.Nhom;
+import com.quanlychiteunhom.backend.services.NhomService;
+import com.quanlychiteunhom.backend.services.QuyService;
 
 import java.util.List;
 

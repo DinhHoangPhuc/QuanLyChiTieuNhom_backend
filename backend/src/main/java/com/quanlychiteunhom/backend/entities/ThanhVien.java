@@ -1,4 +1,4 @@
-package com.quanlychiteunhom.backend.test.controller.entities;
+package com.quanlychiteunhom.backend.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
