@@ -29,7 +29,7 @@ public class ThanhVien {
     @Column(name = "nhom_id")
     private int nhomId;
 
-    @Column(name = "nguoi_dung_id")
+    @Column(name = "nguoi_dung_id") 
     private int nguoiDungId;
 
     @Column(name = "quyen")
