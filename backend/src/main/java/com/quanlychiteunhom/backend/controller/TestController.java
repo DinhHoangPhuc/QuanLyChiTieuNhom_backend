@@ -23,19 +23,6 @@ public class TestController {
 
     @Autowired
     private QuyService quyService;
-
-    // @GetMapping("/nhom")
-    // public ResponseEntity<List<Nhom>> getNhom() {
-    //     return nhomService.getNhom();
-    // }
-
-
-    // @Autowired
-    // public ResponseEntity<Quy> getTIenHT(QuyRequest quyRequest) {
-    //     Quy quy = new Quy();
-    //     quy.getSoTienHT();
-    //     return ResponseEntity.ok(quy);
-    // }
     
     @GetMapping("/nhom")
     public ResponseEntity<List<Nhom>> getNhom() {

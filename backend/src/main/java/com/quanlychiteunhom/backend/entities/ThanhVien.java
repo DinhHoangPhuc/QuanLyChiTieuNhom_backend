@@ -1,11 +1,6 @@
 package com.quanlychiteunhom.backend.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,24 +9,18 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ThanhVien {
-    public ThanhVien() {
-    }
-    public ThanhVien(int nhomId, int nguoiDungId, int quyen) {
-        this.nhomId = nhomId;
-        this.nguoiDungId = nguoiDungId;
-        this.quyen = quyen;
-    }
-    @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @Column(name = "nhom_id")
-    private int nhomId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nhom_id", nullable = false)
+    private Nhom nhom;
 
-    @Column(name = "nguoi_dung_id")
-    private int nguoiDungId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nguoi_dung_id", nullable = false)
+    private NguoiDung nguoiDung;
 
-    @Column(name = "quyen")
+    @Column(name = "quyen", nullable = false)
     private int quyen;
 }

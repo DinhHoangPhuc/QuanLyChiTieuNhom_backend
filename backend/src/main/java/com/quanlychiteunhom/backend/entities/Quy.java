@@ -1,11 +1,6 @@
 package com.quanlychiteunhom.backend.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,23 +9,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Quy {
-
-    public Quy() {
-    }
-
-    public Quy(int soTienBD, int soTienHT) {
-        this.soTienBD = soTienBD;
-        this.soTienHT = soTienHT;
-    }
-
-    @Column(name = "nhom_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int nhomId;
 
-    @Column(name = "so_tien_ban_dau")
-    private int soTienBD;
+    private int soTienBanDau;
+    private int soTienHienTai;
 
-    @Column(name = "so_tien_hien_tai")
-    private int soTienHT;
+    @OneToOne
+    @JoinColumn(name = "nhom_id")
+    private Nhom nhom;
 }
