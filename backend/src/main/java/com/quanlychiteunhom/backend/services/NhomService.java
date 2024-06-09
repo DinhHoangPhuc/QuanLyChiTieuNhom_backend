@@ -7,9 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.quanlychiteunhom.backend.dto.NhomRequest;
 import com.quanlychiteunhom.backend.entities.Nhom;
 import com.quanlychiteunhom.backend.repositories.NhomRepo;
-import com.quanlychiteunhom.backend.request.NhomRequest;
 
 @Service
 public class NhomService {

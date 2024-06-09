@@ -1,4 +1,4 @@
-package com.quanlychiteunhom.backend.request;
+package com.quanlychiteunhom.backend.dto;
 
 import lombok.Getter;
 import lombok.Setter;
