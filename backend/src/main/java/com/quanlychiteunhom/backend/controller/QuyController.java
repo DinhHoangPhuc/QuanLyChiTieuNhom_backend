@@ -20,4 +20,14 @@ public class QuyController {
         double soTienChiaDeu = quyService.tinhTienChiaDeu(nhomId);
         return ResponseEntity.ok(soTienChiaDeu);
     }
+    @GetMapping("/tvm-dong/{nhomId}")
+    public ResponseEntity<Double> tinhTienTVMdong(@PathVariable int nhomId) {
+        double soTienTVMdong = quyService.tinhTienChiaDeu(nhomId);
+        return ResponseEntity.ok(soTienTVMdong);
+    }
+    @GetMapping("/hoan-tien/{nhomId}")
+    public ResponseEntity<Double> tinhTienHoanLai(@PathVariable int nhomId) {
+        double soTienHoanLai = quyService.tinhTienChiaDeu(nhomId);
+        return ResponseEntity.ok(soTienHoanLai);
+    }
 }

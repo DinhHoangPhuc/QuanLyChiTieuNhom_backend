@@ -1,38 +1,44 @@
 package com.quanlychiteunhom.backend.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Set;
 
 @Entity
 @Table(name = "nguoi_dung")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class NguoiDung {
+
+    @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    @Column(name = "ho_ten", nullable = false)
+    @Column(name = "ho_ten")
     private String hoTen;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "sdt", nullable = false, unique = true)
+    @Column(name = "sdt")
     private int sdt;
 
-    @Column(name = "user_name", nullable = false, unique = true)
-    private String userName;
+    @Column(name = "user_name")
+    private String username;
 
-    @Column(name = "passwork", nullable = false)
-    private String passwork;
+    @Column(name = "passwork")
+    private String password;
 
     @Column(name = "avatar")
     private String avatar;
-
-    @OneToMany(mappedBy = "nguoiDung", fetch = FetchType.LAZY)
-    private Set<ThanhVien> thanhViens;
 }
