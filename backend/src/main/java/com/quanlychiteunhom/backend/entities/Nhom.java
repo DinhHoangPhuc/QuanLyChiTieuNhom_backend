@@ -51,4 +51,8 @@ public class Nhom {
     @OneToOne(mappedBy = "nhom")
     @JsonBackReference
     private Quy quy;
+
+    @OneToMany(mappedBy = "nhom")
+    @JsonManagedReference
+    private List<ThanhVien> thanhVien;
 }
