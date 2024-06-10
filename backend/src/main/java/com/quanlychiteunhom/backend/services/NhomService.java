@@ -26,10 +26,11 @@ public class NhomService {
         }
     }
 
-    public ResponseEntity<Nhom> addNhom(NhomRequest nhom) {
+    public ResponseEntity<?> addNhom(NhomRequest nhom) {
         try {
             Nhom _nhom = new Nhom();
             _nhom.setTenNhom(nhom.getTenNhom());
+            _nhom.setMoTa(nhom.getMoTa());
             _nhom.setHinhNhom(nhom.getHinhNhom());
             nhomRepo.save(_nhom);
             return new ResponseEntity<>(_nhom, HttpStatus.CREATED);

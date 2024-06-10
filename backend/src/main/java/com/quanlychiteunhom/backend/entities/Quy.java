@@ -25,7 +25,6 @@ public class Quy {
 
     @Column(name = "nhom_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int nhomId;
 
     @Column(name = "so_tien_ban_dau")

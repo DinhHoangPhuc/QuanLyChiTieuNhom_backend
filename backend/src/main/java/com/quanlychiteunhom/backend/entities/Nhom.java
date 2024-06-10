@@ -31,6 +31,9 @@ public class Nhom {
     @Column(name = "ten_nhom")
     private String tenNhom;
 
+    @Column(name = "mo_ta")
+    private String moTa;
+
     @Column(name = "hinh_nhom")
     private String hinhNhom;
 }
