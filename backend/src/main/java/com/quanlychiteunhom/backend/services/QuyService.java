@@ -12,7 +12,5 @@ import com.quanlychiteunhom.backend.repositories.ThanhVienRepo;
 @Service
 public interface QuyService {
     double tinhTienChiaDeu(int nhomId);
-
-    double chiaDeuTien(int nhomId);
-
+    double soTienHienTai(int nhomId);
 }

@@ -29,13 +29,4 @@ public class TestController {
         return nhomService.getNhom();
     }
 
-    @GetMapping("/chiaDeuTien")
-    public ResponseEntity<String> chiaDeuTien(@RequestParam("nhomId") int nhomId) {
-        try {
-            double soTienMoiThanhVien = quyService.chiaDeuTien(nhomId);
-            return ResponseEntity.ok("Số tiền mỗi thành viên là: " + soTienMoiThanhVien);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
 }

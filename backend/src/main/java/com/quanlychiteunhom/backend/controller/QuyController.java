@@ -30,4 +30,10 @@ public class QuyController {
         double soTienHoanLai = quyService.tinhTienChiaDeu(nhomId);
         return ResponseEntity.ok(soTienHoanLai);
     }
+
+    @GetMapping("/so-tien-hien-tai/{nhomId}")
+    public ResponseEntity<Double> soTienHIenTai(@PathVariable int nhomId) {
+        double soTien = quyService.soTienHienTai(nhomId);
+        return ResponseEntity.ok(soTien);
+    }
 }

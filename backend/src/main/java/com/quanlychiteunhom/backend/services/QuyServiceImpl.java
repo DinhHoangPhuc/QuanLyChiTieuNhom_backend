@@ -36,9 +36,14 @@ public class QuyServiceImpl implements QuyService {
 
         return (double) quy.getSoTienHienTai() / thanhViens.size();
     }
-
     @Override
-    public double chiaDeuTien(int nhomId) {
-        return 0;
+    public double soTienHienTai(int nhomId) {
+        Optional<Quy> quyOptional = quyRepository.findById(nhomId);
+        if (!quyOptional.isPresent()) {
+            throw new ResourceNotFoundException("Không tìm thấy quỹ của nhóm với ID: " + nhomId);
+        }
+
+        Quy quy = quyOptional.get();
+        return (double) quy.getSoTienHienTai();
     }
 }
