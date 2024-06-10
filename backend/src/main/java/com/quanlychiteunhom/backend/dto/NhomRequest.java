@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class NhomRequest {
+    private String username;
     private String tenNhom;
     private String moTa;
     private String hinhNhom;
