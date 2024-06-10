@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.quanlychiteunhom.backend.dto.ThuRequest;
 import com.quanlychiteunhom.backend.entities.Nhom;
+import com.quanlychiteunhom.backend.entities.Quy;
 import com.quanlychiteunhom.backend.entities.Thu;
 import com.quanlychiteunhom.backend.repositories.NhomRepo;
+import com.quanlychiteunhom.backend.repositories.QuyRepo;
 import com.quanlychiteunhom.backend.repositories.ThuRepo;
 
 @Service
@@ -22,6 +24,9 @@ public class ThuService {
     @Autowired
     private ThuRepo thuRepo;
 
+    @Autowired
+    private QuyRepo quyRepo;
+
     public ResponseEntity<?> addThu(ThuRequest thuRequest) {
         try {
             Nhom nhom = nhomRepo.findById(thuRequest.getNhomId()).orElseThrow(() -> new RuntimeException("Nhom khong ton tai"));
@@ -32,6 +37,9 @@ public class ThuService {
             thu.setNhom(nhom);
             nhom.getThu().add(thu);
             nhomRepo.save(nhom);
+            Quy quy = quyRepo.findById(nhom.getId()).orElseThrow(() -> new RuntimeException("Quy khong ton tai"));
+            quy.setSoTienHT(quy.getSoTienHT() + thuRequest.getSoTien());
+            quyRepo.save(quy);
             return new ResponseEntity<>(thuRepo.save(thu), HttpStatus.CREATED);
         } catch (Exception e) {
             Map<String, String> error = Map.of("error", e.getMessage());

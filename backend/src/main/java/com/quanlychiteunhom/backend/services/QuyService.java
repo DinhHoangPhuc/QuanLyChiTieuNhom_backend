@@ -47,6 +47,7 @@ public class QuyService {
             Quy _quy = new Quy();
             _quy.setNhomId(quy.getNhomId());
             _quy.setSoTienBD(quy.getSoTienBD());
+            _quy.setSoTienHT(quy.getSoTienHT());
             quyRepo.save(_quy);
             return new ResponseEntity<>(_quy, HttpStatus.CREATED);
         } catch (Exception e) {
