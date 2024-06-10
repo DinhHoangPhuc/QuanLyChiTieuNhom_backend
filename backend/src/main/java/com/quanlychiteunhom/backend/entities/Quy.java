@@ -1,10 +1,14 @@
 package com.quanlychiteunhom.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,4 +36,9 @@ public class Quy {
 
     @Column(name = "so_tien_hien_tai")
     private int soTienHT;
+
+    @OneToOne
+    @JoinColumn(name = "nhom_id")
+    @JsonManagedReference
+    private Nhom nhom;
 }
