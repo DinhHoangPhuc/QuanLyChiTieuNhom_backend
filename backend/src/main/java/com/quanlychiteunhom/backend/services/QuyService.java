@@ -55,4 +55,14 @@ public class QuyService {
             return ResponseEntity.badRequest().body(error);
         }
     }
+
+    public ResponseEntity<?> getQuy(int nhomId) {
+        try {
+            Quy quy = quyRepo.findById(nhomId).orElseThrow(() -> new RuntimeException("Quỹ không tồn tại"));
+            return new ResponseEntity<>(quy, HttpStatus.OK);
+        } catch (Exception e) {
+            Map<String, String> error = Map.of("error", e.getMessage());
+            return ResponseEntity.badRequest().body(error);
+        }
+    }
 }
