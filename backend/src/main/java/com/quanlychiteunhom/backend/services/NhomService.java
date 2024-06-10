@@ -1,6 +1,7 @@
 package com.quanlychiteunhom.backend.services;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,12 +28,16 @@ public class NhomService {
     @Autowired
     private ThanhVienRepo thanhVienRepo;
 
-    public ResponseEntity<List<Nhom>> getNhom() {
+    public ResponseEntity<?> getNhom(String username) {
         try {
-            List<Nhom> nhom = nhomRepo.findAll();
+            NguoiDung nguoiDung = nguoiDungRepo.findByUsername(username).orElseThrow(() -> new RuntimeException("Người dùng không tồn tại"));
+            int id = nguoiDung.getId();
+
+            List<Nhom> nhom = thanhVienRepo.findByNguoiDung(id);
             return new ResponseEntity<>(nhom, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            Map<String, String> response = Map.of("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
 

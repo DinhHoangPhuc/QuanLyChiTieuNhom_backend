@@ -37,10 +37,10 @@ public class TestController {
     //     return ResponseEntity.ok(quy);
     // }
     
-    @GetMapping("/nhom")
-    public ResponseEntity<List<Nhom>> getNhom() {
-        return nhomService.getNhom();
-    }
+    // @GetMapping("/nhom")
+    // public ResponseEntity<List<Nhom>> getNhom() {
+    //     return nhomService.getNhom();
+    // }
 
     @GetMapping("/chiaDeuTien")
     public ResponseEntity<String> chiaDeuTien(@RequestParam("nhomId") int nhomId) {
