@@ -1,5 +1,7 @@
 package com.quanlychiteunhom.backend.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -20,6 +22,7 @@ import com.quanlychiteunhom.backend.dto.JwtResponse;
 import com.quanlychiteunhom.backend.dto.LoginRequest;
 import com.quanlychiteunhom.backend.dto.LoginResponse;
 import com.quanlychiteunhom.backend.dto.RegisterRequest;
+import com.quanlychiteunhom.backend.dto.RegisterResponse;
 import com.quanlychiteunhom.backend.entities.NguoiDung;
 import com.quanlychiteunhom.backend.security.services.UserDetailService;
 import com.quanlychiteunhom.backend.security.util.JwtUtil;
@@ -42,12 +45,14 @@ public class AuthController {
     private UserDetailService userDetailsService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest) {
         try {
             authService.register(registerRequest);
-            return ResponseEntity.ok("Đăng ký thành công");
+            RegisterResponse registerResponse = new RegisterResponse("Đăng ký thành công");
+            return ResponseEntity.ok(registerResponse);
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            Map<String, String> error = Map.of("error", e.getMessage());
+            return ResponseEntity.badRequest().body(error);
         }
     }
 
@@ -74,7 +79,8 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(
                     nguoiDung.getUsername(), nguoiDung.getPassword()));
         } catch (AuthenticationException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Đăng nhập thất bại");
+            Map<String, String> error = Map.of("error", "Đăng nhập thất bại");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
         }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
