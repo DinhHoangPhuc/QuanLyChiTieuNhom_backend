@@ -21,15 +21,15 @@ public class ThongBaoService {
     @Autowired
     private NhomRepo nhomRepo;
 
-    public ResponseEntity<?> getThongBao() {
-        try {
-            List<ThongBao> thongBao = thongBaoRepo.findAll();
-            return new ResponseEntity<>(thongBao, HttpStatus.OK);
-        } catch (Exception e) {
-            Map<String, String> response = Map.of("error", e.getMessage());
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<?> getThongBao(int nhomId) {
+    try {
+        List<ThongBao> thongBao = thongBaoRepo.findAllByNhom_Id(nhomId);
+        return new ResponseEntity<>(thongBao, HttpStatus.OK);
+    } catch (Exception e) {
+        Map<String, String> response = Map.of("error", e.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
+}
 
     public ResponseEntity<?> addThongBao(ThongBaoRequest thongBaoRequest) {
         try {

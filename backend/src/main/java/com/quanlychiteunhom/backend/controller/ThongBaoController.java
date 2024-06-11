@@ -16,8 +16,8 @@ public class ThongBaoController {
     private ThongBaoService thongBaoService;
 
     @GetMapping("/getThongBao")
-    public ResponseEntity<?> getThongBao() {
-        return thongBaoService.getThongBao();
+    public ResponseEntity<?> getThongBao(@RequestParam int nhomId) {
+        return thongBaoService.getThongBao(nhomId);
     }
 
     @PostMapping(value = "/addThongBao")
