@@ -1,12 +1,20 @@
 package com.quanlychiteunhom.backend.services;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.quanlychiteunhom.backend.dto.ChiRequest;
+import com.quanlychiteunhom.backend.dto.ChiThangStats;
+import com.quanlychiteunhom.backend.dto.ChiTuanStats;
 import com.quanlychiteunhom.backend.entities.Chi;
 import com.quanlychiteunhom.backend.entities.Quy;
 import com.quanlychiteunhom.backend.repositories.ChiRepo;
@@ -43,6 +51,53 @@ public class ChiService {
             });
 
             return new ResponseEntity<>(chi, org.springframework.http.HttpStatus.CREATED);
+        } catch (Exception e) {
+            Map<String, String> response = Map.of("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+    public ResponseEntity<?> thongKeChiTuan(int nhomId) {
+        try {
+            LocalDate now = LocalDate.now();
+            LocalDate startOfWeek = now.with(DayOfWeek.MONDAY);
+            LocalDate endOfWeek = now.with(DayOfWeek.SUNDAY).plusDays(1); // add 1 to include Sunday
+            // List<ChiTuanStats> stats = chiRepo.thongKeChiTuan(nhomId, startOfWeek, endOfWeek);
+
+            List<Object[]> results = chiRepo.thongKeChiTuan(nhomId, startOfWeek, endOfWeek);
+            List<ChiTuanStats> chiTuanStats = results.stream()
+                .map(result -> {
+                    Timestamp timestamp = (Timestamp) result[0];
+                    LocalDate date = timestamp.toLocalDateTime().toLocalDate();
+                    return new ChiTuanStats(date, (BigDecimal) result[1]);
+                })
+                .collect(Collectors.toList());
+            // Map<String, Object> response = Map.of(
+            //     "startOfWeek", startOfWeek,
+            //     "endOfWeek", endOfWeek
+            //     // "stats", chiTuanStats
+            // );
+            // return ResponseEntity.ok(response);
+        return ResponseEntity.ok(chiTuanStats);
+        } catch (Exception e) {
+            Map<String, String> response = Map.of("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+    public ResponseEntity<?> thongKeChiTuanTrongThang(int nhomId) {
+        try {
+            LocalDate now = LocalDate.now();
+            String currentMonth = String.valueOf(now.getMonthValue());
+            String currentYear = String.valueOf(now.getYear());
+    
+            // List<Object[]> results = chiRepo.thongKeChiTuanTrongThang(nhomId, currentMonth, currentYear);
+            List<Object[]> results = chiRepo.thongKeChiTuanTrongThang(nhomId);
+            List<ChiThangStats> chiTuanStats = results.stream()
+                .map(result -> new ChiThangStats((Integer) result[0], (Long) result[1]))
+                .collect(Collectors.toList());
+    
+            return ResponseEntity.ok(chiTuanStats);
         } catch (Exception e) {
             Map<String, String> response = Map.of("error", e.getMessage());
             return ResponseEntity.badRequest().body(response);
