@@ -1,6 +1,6 @@
 package com.quanlychiteunhom.backend.controller;
 
-import com.quanlychiteunhom.backend.services.QuyService;
+import com.quanlychiteunhom.backend.services.QuyServiceChiaDeu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class QuyController {
 
     @Autowired
-    private QuyService quyService;
+    private QuyServiceChiaDeu quyService;
 
     @GetMapping("/chia-deu/{nhomId}")
     public ResponseEntity<Double> tinhTienChiaDeu(@PathVariable int nhomId) {

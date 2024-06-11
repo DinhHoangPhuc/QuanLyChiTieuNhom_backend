@@ -1,12 +1,11 @@
 package com.quanlychiteunhom.backend.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.quanlychiteunhom.backend.entities.Nhom;
 import com.quanlychiteunhom.backend.services.NhomService;
-import com.quanlychiteunhom.backend.services.QuyService;
+import com.quanlychiteunhom.backend.services.QuyServiceChiaDeu;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class TestController {
     private NhomService nhomService;
 
     @Autowired
-    private QuyService quyService;
+    private QuyServiceChiaDeu quyService;
     
     @GetMapping("/nhom")
     public ResponseEntity<List<Nhom>> getNhom() {

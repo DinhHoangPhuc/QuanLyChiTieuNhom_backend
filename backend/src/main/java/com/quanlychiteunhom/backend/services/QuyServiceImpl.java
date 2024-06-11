@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class QuyServiceImpl implements QuyService {
+public class QuyServiceImpl implements QuyServiceChiaDeu {
 
     @Autowired
     private QuyRepo quyRepository;
