@@ -48,6 +48,10 @@ public class Nhom {
     @JsonManagedReference
     private List<Thu> thu;
 
+    @OneToMany(mappedBy = "nhom")
+    @JsonManagedReference
+    private List<ThongBao> thongBao;
+
     @OneToOne(mappedBy = "nhom")
     @JsonBackReference
     private Quy quy;
