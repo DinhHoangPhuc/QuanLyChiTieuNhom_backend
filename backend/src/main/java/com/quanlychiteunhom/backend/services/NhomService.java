@@ -32,7 +32,6 @@ public class NhomService {
         try {
             NguoiDung nguoiDung = nguoiDungRepo.findByUsername(username).orElseThrow(() -> new RuntimeException("Người dùng không tồn tại"));
             int id = nguoiDung.getId();
-
             List<Nhom> nhom = thanhVienRepo.findByNguoiDung(id);
             return new ResponseEntity<>(nhom, HttpStatus.OK);
         } catch (Exception e) {
@@ -55,6 +54,15 @@ public class NhomService {
             thanhVien.setQuyen(1);
             thanhVienRepo.save(thanhVien);
             return new ResponseEntity<>(_nhom, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    public ResponseEntity<?> deleteNhom(int id) {
+        try {
+            Nhom nhom = nhomRepo.findById(id).orElseThrow(() -> new RuntimeException("Nhóm không tồn tại"));
+            nhomRepo.delete(nhom);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

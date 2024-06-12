@@ -2,12 +2,7 @@ package com.quanlychiteunhom.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.quanlychiteunhom.backend.dto.NhomRequest;
 import com.quanlychiteunhom.backend.services.NhomService;
@@ -27,5 +22,10 @@ public class NhomController {
     @GetMapping("/getAllNhom")
     public ResponseEntity<?> getAllNhom(@RequestParam String username) {
         return nhomService.getNhom(username);
+    }
+
+    @DeleteMapping("/xoaNhom")
+    public ResponseEntity<?> deleteNhom(@RequestParam int nhomId) {
+        return nhomService.deleteNhom(nhomId);
     }
 }
