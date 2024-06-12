@@ -34,6 +34,7 @@ public class NhomService {
             int id = nguoiDung.getId();
 
             List<Nhom> nhom = thanhVienRepo.findByNguoiDung(id);
+            
             return new ResponseEntity<>(nhom, HttpStatus.OK);
         } catch (Exception e) {
             Map<String, String> response = Map.of("error", e.getMessage());

@@ -13,5 +13,4 @@ public interface ThanhVienRepo extends JpaRepository<ThanhVien, Integer>{
 
     @Query("SELECT n FROM Nhom n JOIN n.thanhVien tv WHERE tv.nguoiDung.id = ?1")
     List<Nhom> findByNguoiDung(int nguoiDungId);
-
 }
