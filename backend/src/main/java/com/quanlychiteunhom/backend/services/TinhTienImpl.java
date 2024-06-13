@@ -9,6 +9,7 @@ import com.quanlychiteunhom.backend.entities.ThanhVien;
 import com.quanlychiteunhom.backend.repositories.ThanhVienRepo;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -21,7 +22,7 @@ public class TinhTienImpl implements TinhTienService {
     private ThanhVienRepo thanhVienRepository;
 
     @Override
-    public double tinhTienChiaDeu(int nhomId) {
+    public Map<String, Double> tinhTienChiaDeu(int nhomId) {
         Optional<Quy> quyOptional = quyRepository.findById(nhomId);
         if (!quyOptional.isPresent()) {
             throw new ResourceNotFoundException("Không tìm thấy quỹ của nhóm với ID: " + nhomId);
@@ -33,17 +34,22 @@ public class TinhTienImpl implements TinhTienService {
         if (thanhViens.isEmpty()) {
             throw new IllegalStateException("Nhóm không có thành viên.");
         }
-
-        return (double) quy.getSoTienHT() / thanhViens.size();
+        Map<String, Double> tienThanhVien = Map.of(
+                "tienThanhVien", (double) quy.getSoTienHT() / thanhViens.size()
+        );
+        return tienThanhVien;
     }
     @Override
-    public double soTienHienTai(int nhomId) {
+    public Map<String, Double> soTienHienTai(int nhomId) {
         Optional<Quy> quyOptional = quyRepository.findById(nhomId);
         if (!quyOptional.isPresent()) {
             throw new ResourceNotFoundException("Không tìm thấy quỹ của nhóm với ID: " + nhomId);
         }
 
         Quy quy = quyOptional.get();
-        return (double) quy.getSoTienHT();
+        Map<String, Double> tienThanhVien = Map.of(
+                "soTienHienTai", (double) quy.getSoTienHT()
+        );
+        return tienThanhVien;
     }
 }
