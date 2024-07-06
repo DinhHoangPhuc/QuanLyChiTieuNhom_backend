@@ -2,6 +2,7 @@ package com.quanlychiteunhom.backend.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -30,9 +31,10 @@ public class Quy {
         this.soTienHT = soTienHT;
     }
 
-    @Column(name = "nhom_id")
     @Id
-    private int nhomId;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name = "so_tien_ban_dau")
     private int soTienBD;
@@ -41,11 +43,15 @@ public class Quy {
     private int soTienHT;
 
     @OneToOne
-    @JoinColumn(name = "nhom_id")
+    @JoinColumn(name = "nhom_id", unique = true)
     @JsonManagedReference
     private Nhom nhom;
 
     @OneToMany(mappedBy = "quy")
     @JsonManagedReference
     private List<Chi> chis;
+
+    @OneToMany(mappedBy = "quy")
+    @JsonManagedReference
+    private List<Thu> thus;
 }

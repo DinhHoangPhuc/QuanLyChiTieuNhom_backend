@@ -34,8 +34,7 @@ public class ThuService {
             thu.setSoTien(thuRequest.getSoTien());
             thu.setMoTa(thuRequest.getMoTa());
             thu.setNgayThu(thuRequest.getNgayThu());
-            thu.setNhom(nhom);
-            nhom.getThu().add(thu);
+            thu.setQuy(nhom.getQuy());
             nhomRepo.save(nhom);
             Quy quy = quyRepo.findById(nhom.getId()).orElseThrow(() -> new RuntimeException("Quy khong ton tai"));
             quy.setSoTienHT(quy.getSoTienHT() + thuRequest.getSoTien());

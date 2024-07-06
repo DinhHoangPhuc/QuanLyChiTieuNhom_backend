@@ -23,9 +23,6 @@ import com.quanlychiteunhom.backend.security.services.JwtAuthenticationEntryPoin
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-
-    
-
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 

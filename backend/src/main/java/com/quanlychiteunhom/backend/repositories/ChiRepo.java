@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.quanlychiteunhom.backend.dto.ChiTuanStats;
 import com.quanlychiteunhom.backend.entities.Chi;
 
 public interface ChiRepo extends JpaRepository<Chi, Integer>{
@@ -16,7 +15,10 @@ public interface ChiRepo extends JpaRepository<Chi, Integer>{
     List<Object[]> thongKeChiTuan(@Param("nhomId") int nhomId, @Param("startOfWeek") LocalDate startOfWeek, @Param("endOfWeek") LocalDate endOfWeek);
 
     @Query("""
-        SELECT WEEK(chi.ngayChi) as tuan, SUM(chi.soTien) as tong_chi FROM Chi chi WHERE chi.quy.nhomId = :nhomId AND MONTH(chi.ngayChi) = 10 AND YEAR(chi.ngayChi) = 2024 GROUP BY WEEK(chi.ngayChi)
-            """)
+    SELECT WEEK(chi.ngayChi) as tuan, SUM(chi.soTien) as tong_chi 
+    FROM Chi chi 
+    WHERE chi.quy.nhom.id = :nhomId AND MONTH(chi.ngayChi) = 10 AND YEAR(chi.ngayChi) = 2024 
+    GROUP BY WEEK(chi.ngayChi)
+    """)
     List<Object[]> thongKeChiTuanTrongThang(@Param("nhomId") int nhomId);
 }

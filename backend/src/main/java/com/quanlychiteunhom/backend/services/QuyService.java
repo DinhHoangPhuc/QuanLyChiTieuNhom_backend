@@ -2,6 +2,7 @@ package com.quanlychiteunhom.backend.services;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,7 @@ public class QuyService {
     @Autowired
     private NhomRepo nhomRepo;
 
+
     public double chiaDeuTien(int nhomId) {
         Quy quy = quyRepo.findById(nhomId).orElseThrow(() -> new RuntimeException("Nhóm không tồn tại"));
         List<ThanhVien> thanhVienList = thanhVienRepo.findByNhomId(nhomId);
@@ -43,9 +45,8 @@ public class QuyService {
 
     public ResponseEntity<?> addQuy(QuyRequest quy) {
         try {
-            Nhom nhom = nhomRepo.findById(quy.getNhomId()).orElseThrow(() -> new RuntimeException("Nhóm không tồn tại"));
             Quy _quy = new Quy();
-            _quy.setNhomId(quy.getNhomId());
+            _quy.setNhom(nhomRepo.findById(quy.getNhomId()).orElseThrow(() -> new RuntimeException("Nhóm không tồn tại")));
             _quy.setSoTienBD(quy.getSoTienBD());
             _quy.setSoTienHT(quy.getSoTienHT());
             quyRepo.save(_quy);
@@ -58,7 +59,7 @@ public class QuyService {
 
     public ResponseEntity<?> getQuy(int nhomId) {
         try {
-            Quy quy = quyRepo.findById(nhomId).orElseThrow(() -> new RuntimeException("Quỹ không tồn tại"));
+            Quy quy = quyRepo.findByNhomId(nhomId).orElseThrow(() -> new RuntimeException("Quỹ không tồn tại"));
             return new ResponseEntity<>(quy, HttpStatus.OK);
         } catch (Exception e) {
             Map<String, String> error = Map.of("error", e.getMessage());

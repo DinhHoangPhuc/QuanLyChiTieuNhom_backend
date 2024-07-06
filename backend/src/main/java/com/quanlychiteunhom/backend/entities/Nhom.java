@@ -3,6 +3,7 @@ package com.quanlychiteunhom.backend.entities;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -46,17 +47,16 @@ public class Nhom {
 
     @OneToMany(mappedBy = "nhom")
     @JsonManagedReference
-    private List<Thu> thu;
-
-    @OneToMany(mappedBy = "nhom")
-    @JsonManagedReference
+    @JsonIgnore
     private List<ThongBao> thongBao;
 
     @OneToOne(mappedBy = "nhom")
     @JsonBackReference
+    @JsonIgnore
     private Quy quy;
 
     @OneToMany(mappedBy = "nhom")
     @JsonManagedReference
+    @JsonIgnore
     private List<ThanhVien> thanhVien;
 }

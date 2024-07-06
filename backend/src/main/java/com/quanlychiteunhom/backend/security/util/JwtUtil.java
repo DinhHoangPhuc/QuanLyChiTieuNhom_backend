@@ -1,11 +1,7 @@
 package com.quanlychiteunhom.backend.security.util;
 
-import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
 
 import javax.crypto.SecretKey;
 
@@ -13,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -26,10 +21,10 @@ import jakarta.servlet.http.HttpServletRequest;
 public class JwtUtil {
 
 	@Value("${spring.app.jwtSecret}")
-    String secretKey;
+    private String secretKey;
 
 	@Value("${spring.app.jwtExpirationMs}")
-	String expirationTime;
+	private String expirationTime;
 
 	public String getJwtFromHeader(HttpServletRequest request) {
 		String bearerToken = request.getHeader("Authorization");
@@ -39,8 +34,8 @@ public class JwtUtil {
 		return null;
 	}
 
-	public String generateTokenFromUsername(UserDetails userDetails) {
-		String username = userDetails.getUsername();
+	public String generateTokenFromUsername(String username) {
+		// String username = userDetails.getUsername();
 		return Jwts.builder()
 				.subject(username)
 				.issuedAt(new Date())

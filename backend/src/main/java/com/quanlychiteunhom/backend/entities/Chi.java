@@ -39,7 +39,7 @@ public class Chi {
     private String moTa;
 
     @ManyToOne
-    @JoinColumn(name = "nhom_id")
+    @JoinColumn(name = "quy_id")
     @JsonBackReference
     private Quy quy;
 }
