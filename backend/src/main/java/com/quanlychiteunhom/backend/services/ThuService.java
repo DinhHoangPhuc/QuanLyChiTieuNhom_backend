@@ -29,16 +29,15 @@ public class ThuService {
 
     public ResponseEntity<?> addThu(ThuRequest thuRequest) {
         try {
-            Nhom nhom = nhomRepo.findById(thuRequest.getNhomId()).orElseThrow(() -> new RuntimeException("Nhom khong ton tai"));
+            Quy quy = quyRepo.findById(thuRequest.getNhomId())
+                                .orElseThrow(() -> new RuntimeException("Quy khong ton tai"));
+            quy.setSoTienHT(quy.getSoTienHT() + thuRequest.getSoTien());
+            quyRepo.save(quy);
             Thu thu = new Thu();
             thu.setSoTien(thuRequest.getSoTien());
             thu.setMoTa(thuRequest.getMoTa());
             thu.setNgayThu(thuRequest.getNgayThu());
-            thu.setQuy(nhom.getQuy());
-            nhomRepo.save(nhom);
-            Quy quy = quyRepo.findById(nhom.getId()).orElseThrow(() -> new RuntimeException("Quy khong ton tai"));
-            quy.setSoTienHT(quy.getSoTienHT() + thuRequest.getSoTien());
-            quyRepo.save(quy);
+            thu.setQuy(quy);
             return new ResponseEntity<>(thuRepo.save(thu), HttpStatus.CREATED);
         } catch (Exception e) {
             Map<String, String> error = Map.of("error", e.getMessage());

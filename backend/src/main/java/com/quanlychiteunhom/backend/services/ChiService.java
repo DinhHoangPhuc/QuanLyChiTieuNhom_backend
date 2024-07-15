@@ -80,7 +80,10 @@ public class ChiService {
 
     public ResponseEntity<?> thongKeChiTuanTrongThang(int nhomId) {
         try {
-            List<Object[]> results = chiRepo.thongKeChiTuanTrongThang(nhomId);
+            LocalDate now = LocalDate.now();
+            int month = now.getMonthValue();
+            int year = now.getYear();
+            List<Object[]> results = chiRepo.thongKeChiTuanTrongThang(nhomId, month, year);
             List<ChiThangStats> chiTuanStats = results.stream()
                 .map(result -> new ChiThangStats((Integer) result[0], (Long) result[1]))
                 .collect(Collectors.toList());

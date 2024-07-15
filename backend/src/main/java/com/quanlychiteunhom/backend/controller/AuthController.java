@@ -1,5 +1,6 @@
 package com.quanlychiteunhom.backend.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,8 @@ import com.quanlychiteunhom.backend.entities.RefreshToken;
 import com.quanlychiteunhom.backend.security.util.JwtUtil;
 import com.quanlychiteunhom.backend.services.AuthService;
 import com.quanlychiteunhom.backend.services.RefreshTokenService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -43,7 +47,16 @@ public class AuthController {
     private RefreshTokenService refreshTokenService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest,
+                                                            BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> error = new HashMap<>();
+            bindingResult.getFieldErrors().forEach(fieldError -> {
+                error.put(fieldError.getField(), fieldError.getDefaultMessage());
+            });
+            return ResponseEntity.badRequest().body(error);
+        }
+
         try {
             authService.register(registerRequest);
             RegisterResponse registerResponse = new RegisterResponse("Đăng ký thành công");
@@ -60,10 +73,11 @@ public class AuthController {
         try {
             authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                    nguoiDung.getUsername(), nguoiDung.getPassword()));
+                    nguoiDung.getUsername(),
+                    nguoiDung.getPassword()));
         } catch (AuthenticationException e) {
             Map<String, String> error = Map.of("error", "Đăng nhập thất bại");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
         }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -80,7 +94,8 @@ public class AuthController {
 
     @PostMapping("/refreshToken")
     public ResponseEntity<?> refreshToken (@RequestBody RefreshTokenRequest refreshTokenRequest) {
-        String requestToken = refreshTokenRequest.getRefreshToken();
+        try {
+            String requestToken = refreshTokenRequest.getRefreshToken();
         return refreshTokenService.findByToken(requestToken)
                 .map(refreshTokenService::verifyExpiration)
                 .map(RefreshToken::getNguoiDung)
@@ -89,5 +104,9 @@ public class AuthController {
                     return new ResponseEntity<>(new LoginResponse(jwt, user.getUsername(), requestToken), HttpStatus.CREATED);
                 })
                 .orElseThrow(() -> new RuntimeException("Refresh token was expired. Please make a new signin request"));
+        } catch (RuntimeException e) {
+            Map<String, String> error = Map.of("error", e.getMessage());
+            return ResponseEntity.badRequest().body(error);
+        }
     }
 }

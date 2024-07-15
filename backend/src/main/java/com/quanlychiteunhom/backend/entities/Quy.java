@@ -45,13 +45,16 @@ public class Quy {
     @OneToOne
     @JoinColumn(name = "nhom_id", unique = true)
     @JsonManagedReference
+    @JsonIgnore
     private Nhom nhom;
 
     @OneToMany(mappedBy = "quy")
     @JsonManagedReference
+    // @JsonIgnore
     private List<Chi> chis;
 
     @OneToMany(mappedBy = "quy")
     @JsonManagedReference
+    // @JsonIgnore
     private List<Thu> thus;
 }

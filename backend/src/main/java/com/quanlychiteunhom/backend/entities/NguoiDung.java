@@ -32,13 +32,16 @@ public class NguoiDung {
     @Column(name = "ho_ten")
     private String hoTen;
 
-    @Column(name = "email")
+    @Column(name = "email",
+            unique = true)
     private String email;
 
-    @Column(name = "sdt")
+    @Column(name = "sdt",
+            unique = true)
     private int sdt;
 
-    @Column(name = "user_name")
+    @Column(name = "user_name",
+            unique = true)
     private String username;
 
     @Column(name = "passwork")
