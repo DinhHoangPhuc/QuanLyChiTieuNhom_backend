@@ -71,7 +71,7 @@ public class ChiService {
                     return new ChiTuanStats(date, (BigDecimal) result[1]);
                 })
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(chiTuanStats);
+            return ResponseEntity.ok(chiTuanStats);
         } catch (Exception e) {
             Map<String, String> response = Map.of("error", e.getMessage());
             return ResponseEntity.badRequest().body(response);
