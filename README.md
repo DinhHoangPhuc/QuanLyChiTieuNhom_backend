@@ -1,10 +1,12 @@
-# Project Name
+# Group Budget App Back end
 
 ## Overview
 This project is a backend for [Android Mobile Group Budget App](https://github.com/DinhHoangPhuc/QuanLyChiTieuNhom). It is built using Spring Boot for the backend and Android Studio for the mobile application.
 
 ## Features
 - RESTful API implementation
+- JWT authentication
+- Refresh token
 - MySQL database integration
 - Input validation using Spring Boot Starter Validation
 - Mobile application development with Android Studio
